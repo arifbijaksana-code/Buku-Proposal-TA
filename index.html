@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menulis Proposal TA Informatika</title>
+<meta name="description" content="Buku ajar gratis (CC BY 4.0) untuk menulis proposal tugas akhir Informatika komponen demi komponen, beserta slide per bab, lembar kerja (template), dan kerangka proposal.">
+<meta name="author" content="Moch Arif Bijaksana">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Menulis Proposal Tugas Akhir Informatika">
+<meta property="og:description" content="Buku ajar, slide per bab, lembar kerja (template), dan kerangka proposal TA. Fakultas Informatika, Universitas Telkom. CC BY 4.0.">
+<meta name="theme-color" content="#24476b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='10' y='6' width='44' height='52' rx='5' fill='%2324476b'/%3E%3Crect x='18' y='18' width='28' height='4' rx='2' fill='%238fc0ad'/%3E%3Crect x='18' y='28' width='22' height='4' rx='2' fill='%23eef3f8'/%3E%3Crect x='18' y='38' width='26' height='4' rx='2' fill='%23eef3f8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,650&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a single reading column with a book-cover hero, a proposal map, then the chapter list grouped by Bagian. */
+:root{
+  --paper:#f5f6f8;
+  --surface:#ffffff;
+  --ink:#1c2533;
+  --muted:#5a6475;
+  --rule:#dde1e8;
+  --accent:#2c5a85;
+  --accent-soft:#e6edf5;
+  --sage:#4f7a6a;
+  --sage-soft:#e7f0ec;
+  --display:"Literata", Georgia, "Times New Roman", serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141922; --surface:#1b2230; --ink:#e7eaf0; --muted:#a3acbb; --rule:#2c3545;
+    --accent:#8db6dc; --accent-soft:#22324a; --sage:#8fc0ad; --sage-soft:#1f3330; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141922; --surface:#1b2230; --ink:#e7eaf0; --muted:#a3acbb; --rule:#2c3545;
+  --accent:#8db6dc; --accent-soft:#22324a; --sage:#8fc0ad; --sage-soft:#1f3330; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6}
+a{color:var(--accent)}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--display);font-weight:650;line-height:1.2;text-wrap:balance;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* top nav */
+.topnav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule)}
+.topnav .wrap{display:flex;gap:20px;align-items:center;height:52px;overflow-x:auto;white-space:nowrap}
+.topnav .brand{font-family:var(--display);font-weight:650;color:var(--ink);text-decoration:none;margin-right:auto}
+.topnav a{font-size:15px;text-decoration:none;color:var(--muted)}
+.topnav a:hover{color:var(--accent)}
+
+/* hero */
+.hero{padding:56px 0 48px;border-bottom:1px solid var(--rule)}
+.hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center}
+.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--sage);font-weight:700;margin:0 0 10px}
+.hero h1{font-size:clamp(32px,4.6vw,48px)}
+.hero .sub{font-family:var(--display);font-size:clamp(19px,2.2vw,23px);color:var(--muted);margin:12px 0 22px;font-weight:500}
+.hero .lead{max-width:60ch;margin:0 0 26px}
+.byline{font-size:15px;color:var(--muted);margin:0 0 26px}
+.byline strong{color:var(--ink)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:8px;font-weight:600;text-decoration:none;font-size:16px;border:1px solid var(--accent)}
+.btn-primary{background:var(--accent);color:var(--surface)}
+.btn-ghost{color:var(--accent);background:transparent}
+.btn:hover{filter:brightness(1.08)}
+
+/* cover */
+.cover{background:linear-gradient(160deg,#24476b 0%,#1c3651 100%);color:#eef3f8;border-radius:6px 12px 12px 6px;padding:28px 26px 22px;box-shadow:0 18px 40px -18px rgba(20,35,60,.55), inset 8px 0 0 rgba(255,255,255,.08);aspect-ratio:3/4;display:flex;flex-direction:column;max-width:360px;justify-self:center;width:100%}
+.cover small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.cover h2{font-size:24px;margin:8px 0 6px;color:#fff}
+.cover p{font-family:var(--display);font-size:13px;opacity:.85;margin:0 0 16px;line-height:1.4}
+.cover .stack{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:auto}
+.cover .stack span{font-family:var(--mono);font-size:10.5px;text-align:center;padding:4px 0;border-radius:3px;background:rgba(255,255,255,.1)}
+.cover .stack span.hl{background:#8fc0ad;color:#13261f}
+.cover .who{font-size:11.5px;opacity:.8;margin-top:14px;border-top:1px solid rgba(255,255,255,.2);padding-top:10px}
+
+/* sections */
+section.block{padding:56px 0;border-bottom:1px solid var(--rule)}
+.block h2{font-size:clamp(26px,3vw,32px);margin-bottom:10px}
+.block .intro{max-width:66ch;color:var(--muted);margin:0 0 28px}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:8px}
+.fact{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px}
+.fact b{display:block;font-family:var(--display);font-size:30px;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.1}
+.fact span{font-size:15px;color:var(--muted)}
+
+.ideas{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:28px}
+.idea{border-left:3px solid var(--sage);padding:2px 0 2px 16px}
+.idea h3{font-size:19px;margin-bottom:6px}
+.idea p{margin:0;color:var(--muted);font-size:16px}
+
+/* proposal map */
+.docmap{display:grid;grid-template-columns:1fr 1.3fr 1fr 1.6fr;gap:14px;align-items:start}
+.doccol{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px}
+.doccol h4{font-size:16px;margin-bottom:10px;color:var(--accent)}
+.doccol ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.doccol a{display:flex;flex-direction:column;gap:1px;text-decoration:none;color:var(--ink);padding:6px 8px;border-radius:6px}
+.doccol a:hover{background:var(--accent-soft)}
+.kname{font-size:14px;color:var(--muted);line-height:1.35}
+.code{font-family:var(--mono);font-size:13px;color:var(--accent);white-space:nowrap}
+.code b{font-weight:500;color:var(--ink)}
+.code-plain{color:var(--muted)}
+.order{list-style:none;margin:30px 0 0;padding:0;display:grid;grid-template-columns:repeat(7,1fr);gap:8px;counter-reset:s}
+.order li{background:var(--sage-soft);border-radius:8px;padding:12px 10px;display:flex;flex-direction:column;gap:3px;position:relative}
+.order .step{font-family:var(--mono);font-size:12px;color:var(--sage)}
+.order strong{font-size:15px;line-height:1.25}
+.order .ocodes{font-family:var(--mono);font-size:11.5px;color:var(--ink);opacity:.8}
+.order .obab{font-size:13px;color:var(--muted);margin-top:auto}
+.maplabel{font-size:14px;font-weight:700;color:var(--muted);margin:30px 0 0;text-transform:uppercase;letter-spacing:.06em}
+
+/* TOC */
+.tools{display:flex;gap:10px;margin:-8px 0 22px;flex-wrap:wrap}
+.tools button{font:inherit;font-size:14px;padding:6px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);cursor:pointer}
+.tools button:hover{border-color:var(--accent);color:var(--accent)}
+.bagian{display:grid;grid-template-columns:260px 1fr;gap:28px;padding:26px 0;border-top:1px solid var(--rule)}
+.bagian:first-of-type{border-top:0}
+.bagian-head h3{font-size:22px;margin-bottom:8px}
+.bagian-head p{font-size:15px;color:var(--muted);margin:0 0 12px}
+.babs{display:grid;gap:8px}
+details.bab{background:var(--surface);border:1px solid var(--rule);border-radius:10px}
+details.bab[open]{border-color:color-mix(in srgb,var(--accent) 45%,var(--rule))}
+details.bab summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:78px 1fr auto 64px 14px;gap:12px;align-items:baseline;padding:12px 16px}
+details.bab summary::-webkit-details-marker{display:none}
+.babnum{font-family:var(--mono);font-size:13px;color:var(--sage)}
+.babtitle{font-weight:600;line-height:1.35}
+.chips{display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:flex-end}
+.page{font-size:13px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.babbody{padding:4px 16px 16px 106px}
+.subs{list-style:none;margin:0 0 12px;padding:0;columns:2;column-gap:28px;font-size:15px}
+.subs li{break-inside:avoid;padding:3px 0;display:flex;gap:8px;color:var(--ink)}
+.subs .num{font-family:var(--mono);font-size:12.5px;color:var(--muted);min-width:38px;padding-top:2px}
+.slide{display:inline-block;font-size:14px;font-weight:600;text-decoration:none;padding:5px 11px;border-radius:6px;background:var(--accent-soft);color:var(--accent)}
+.slide:hover{text-decoration:underline}
+.slide-sm{font-size:13px}
+.note{font-size:15px;color:var(--muted);margin:0}
+.lamps{display:grid;gap:8px}
+details.lamp summary{grid-template-columns:100px 1fr auto 104px 14px}
+details.bab summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg) translateY(-3px);justify-self:end;align-self:center;transition:transform .15s}
+details.bab[open] summary::after{transform:rotate(-135deg)}
+details.bab summary:hover .babtitle{color:var(--accent)}
+details.lamp .babbody{padding-left:128px}
+
+/* downloads */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.card h3{font-size:19px}
+.card p{margin:0;color:var(--muted);font-size:15.5px}
+.card .fmt{font-family:var(--mono);font-size:12px;color:var(--sage)}
+.card .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:8px}
+.card .links a{font-weight:600;font-size:15px}
+.examples{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px}
+.ex{border-top:3px solid var(--accent);padding-top:12px}
+.ex.alt{border-top-color:var(--sage)}
+.ex h3{font-size:18px;margin-bottom:6px}
+.ex p{margin:0;font-size:15.5px;color:var(--muted)}
+.ex .tag{font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--muted);display:block;margin-bottom:4px}
+
+/* license */
+.license{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.license ul{margin:0;padding-left:20px}
+.license li{margin:4px 0}
+.attr{background:var(--surface);border:1px dashed var(--rule);border-radius:10px;padding:16px;font-size:15px}
+.attr p{margin:0 0 10px}
+.attr button{font:inherit;font-size:14px;padding:6px 12px;border-radius:6px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+footer{padding:30px 0 50px;color:var(--muted);font-size:14px}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr}
+  .cover{max-width:300px}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .docmap{grid-template-columns:1fr 1fr}
+  .order{grid-template-columns:repeat(4,1fr)}
+  .bagian{grid-template-columns:1fr;gap:14px}
+  .examples{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .ideas,.cards,.license,.docmap{grid-template-columns:1fr}
+  .order{grid-template-columns:1fr 1fr}
+  details.bab summary,details.lamp summary{grid-template-columns:1fr auto;gap:4px 10px}
+  details.bab summary::after{display:none}
+  .babnum{grid-column:1}.page{grid-column:2;grid-row:1}
+  .babtitle{grid-column:1/-1}.chips{grid-column:1/-1;justify-content:flex-start}
+  .babbody,details.lamp .babbody{padding-left:16px}
+  .subs{columns:1}
+}
+</style>
+</head>
+<body>
+<nav class="topnav" aria-label="Navigasi halaman">
+  <div class="wrap">
+    <a class="brand" href="#atas">Proposal TA Informatika</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#peta">Peta proposal</a>
+    <a href="#isi">Daftar isi</a>
+    <a href="#unduh">Unduh</a>
+    <a href="#lisensi">Lisensi</a>
+  </div>
+</nav>
+
+<header class="hero" id="atas">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Buku ajar · Draf 11 November 2026</p>
+      <h1>Menulis Proposal Tugas Akhir Informatika</h1>
+      <p class="sub">Komponen demi Komponen, dari Literatur sampai Rencana Analisis Hasil</p>
+      <p class="lead">Setiap bagian proposal ditulis satu per satu sebagai poin yang bisa diperiksa, lalu dirangkai menjadi naskah yang utuh. Buku ini untuk mahasiswa S1 Informatika dan bidang dekatnya yang TA-nya berbasis eksperimen komputasional, termasuk Sains Data.</p>
+      <p class="byline"><strong>Moch Arif Bijaksana</strong> · Fakultas Informatika, Universitas Telkom</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://drive.google.com/file/d/10RrBLsiYM1OjCi3eSwnB111FTAaGTNHb/view" target="_blank" rel="noopener">Baca buku (PDF)</a>
+        <a class="btn btn-ghost" href="https://drive.google.com/drive/folders/1VuBwr708MYs6S2zCVPopTHKKwsE_j1it" target="_blank" rel="noopener">Buka folder buku dan kelengkapan</a>
+      </div>
+    </div>
+    <div class="cover" aria-hidden="true">
+      <small>Buku ajar</small>
+      <h2>Menulis Proposal Tugas Akhir Informatika</h2>
+      <p>Komponen demi Komponen, dari Literatur sampai Rencana Analisis Hasil</p>
+      <div class="stack">
+        <span>K00</span><span>K01</span><span>K02</span><span>K03</span>
+        <span>K04</span><span>K05</span><span>K18</span><span class="hl">K06</span>
+        <span class="hl">K07</span><span>K08</span><span>K09</span><span>K10</span>
+        <span>K11</span><span>K12</span><span>K13</span><span>K14</span>
+        <span>K15</span><span>K16</span><span>K17</span><span>PRA</span>
+      </div>
+      <div class="who">Moch Arif Bijaksana · Fakultas Informatika, Universitas Telkom</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="block" id="tentang">
+  <div class="wrap">
+    <p class="eyebrow">Tentang buku</p>
+    <h2>Proposal dipecah menjadi komponen yang bisa diperiksa</h2>
+    <p class="intro">Proposal tugas akhir sering menjadi tulisan ilmiah panjang pertama yang disusun mahasiswa. Buku ini memecahnya menjadi sembilan belas komponen, dari K00&#8209;judul sampai K18&#8209;jadwal. Setiap komponen ditulis sebagai poin, satu klaim per poin, dan baru dirangkai menjadi naskah naratif di akhir.</p>
+    <div class="facts">
+      <div class="fact"><b>22</b><span>bab dalam lima bagian</span></div>
+      <div class="fact"><b>19</b><span>komponen proposal, K00 sampai K18</span></div>
+      <div class="fact"><b>5</b><span>komponen persiapan, PRA1 sampai PRA5</span></div>
+      <div class="fact"><b>7</b><span>lampiran, A sampai G; Lampiran D masih ditulis</span></div>
+    </div>
+    <div class="ideas">
+      <div class="idea"><h3>Urutan menulis berbeda dari urutan dokumen</h3><p>Kajian pustaka (K06&#8209;matriks dan K07&#8209;landasan) dikerjakan lebih dulu. Celah dan posisi TA dari kajian itu menjadi dasar latar belakang dan rumusan masalah.</p></div>
+      <div class="idea"><h3>Benang merah dari celah sampai analisis</h3><p>Setiap komponen menjawab pertanyaan yang dibuka komponen sebelumnya. Perubahan di satu komponen merambat ke komponen lain, jadi rantainya diuji sebelum naskah dirangkai.</p></div>
+      <div class="idea"><h3>LLM dipakai dengan bertanggung jawab</h3><p>Banyak bab memuat contoh prompt dan batasnya. Setiap klaim dan sumber tetap kamu periksa sendiri, dan penggunaan LLM dinyatakan terbuka lewat deklarasi (Lampiran B).</p></div>
+      <div class="idea"><h3>Kamu harus menguasai yang kamu tulis</h3><p>Proposal yang baik tidak cukup rapi di atas kertas. Bab 22 menyiapkanmu menjelaskan dan mempertanggungjawabkan proposal secara lisan.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="peta">
+  <div class="wrap">
+    <p class="eyebrow">Peta proposal</p>
+    <h2>Letak sembilan belas komponen di dokumen</h2>
+    <p class="intro">Kode adalah identitas tetap, bukan nomor urut kerja. Nama bab mengikuti template Fakultas Informatika; ikuti template prodimu bila berbeda. Klik komponen untuk membuka bab yang membahasnya.</p>
+    <div class="docmap"><div class="doccol"><h4>Halaman awal</h4><ul><li><a href="#bab-7"><span class="code"><b>K00</b>&#8209;judul</span><span class="kname">Judul proposal</span></a></li><li><a href="#bab-10"><span class="code"><b>K01</b>&#8209;abstrak</span><span class="kname">Abstrak</span></a></li></ul></div><div class="doccol"><h4>Bab I Pendahuluan</h4><ul><li><a href="#bab-7"><span class="code"><b>K02</b>&#8209;latarbelakang</span><span class="kname">Latar belakang</span></a></li><li><a href="#bab-8"><span class="code"><b>K03</b>&#8209;masalah</span><span class="kname">Rumusan masalah dan pertanyaan kajian</span></a></li><li><a href="#bab-9"><span class="code"><b>K04</b>&#8209;tujuan</span><span class="kname">Tujuan, manfaat, dan batasan</span></a></li><li><a href="#bab-10"><span class="code"><b>K05</b>&#8209;ilustrasi</span><span class="kname">Ilustrasi masukan-keluaran</span></a></li><li><a href="#bab-20"><span class="code"><b>K18</b>&#8209;jadwal</span><span class="kname">Rencana kegiatan dan jadwal</span></a></li></ul></div><div class="doccol"><h4>Bab II Kajian Pustaka</h4><ul><li><a href="#bab-5"><span class="code"><b>K06</b>&#8209;matriks</span><span class="kname">Matriks Literatur</span></a></li><li><a href="#bab-6"><span class="code"><b>K07</b>&#8209;landasan</span><span class="kname">Landasan teori, sintesis, dan posisi TA</span></a></li></ul></div><div class="doccol"><h4>Bab III Metodologi</h4><ul><li><a href="#bab-11"><span class="code"><b>K08</b>&#8209;data</span><span class="kname">Deskripsi data</span></a></li><li><a href="#bab-12"><span class="code"><b>K09</b>&#8209;eda</span><span class="kname">Rencana EDA</span></a></li><li><a href="#bab-13"><span class="code"><b>K10</b>&#8209;praproses</span><span class="kname">Rencana praproses</span></a></li><li><a href="#bab-14"><span class="code"><b>K11</b>&#8209;metode</span><span class="kname">Metode usulan</span></a></li><li><a href="#bab-14"><span class="code"><b>K12</b>&#8209;framework</span><span class="kname">Arsitektur dan framework</span></a></li><li><a href="#bab-15"><span class="code"><b>K13</b>&#8209;baseline</span><span class="kname">Baseline pembanding</span></a></li><li><a href="#bab-16"><span class="code"><b>K14</b>&#8209;eksperimen</span><span class="kname">Rancangan eksperimen</span></a></li><li><a href="#bab-17"><span class="code"><b>K15</b>&#8209;metrik</span><span class="kname">Metrik evaluasi</span></a></li><li><a href="#bab-18"><span class="code"><b>K16</b>&#8209;analisis</span><span class="kname">Rencana analisis hasil</span></a></li><li><a href="#bab-19"><span class="code"><b>K17</b>&#8209;etika</span><span class="kname">Keterbatasan dan etika</span></a></li></ul></div></div>
+    <p class="maplabel">Urutan menulis</p>
+    <ol class="order"><li><span class="step">1</span><strong>Persiapan</strong><span class="ocodes">PRA1 – PRA5</span><span class="obab">Bab 1–4</span></li><li><span class="step">2</span><strong>Kajian pustaka</strong><span class="ocodes">K06 · K07</span><span class="obab">Bab 5–6</span></li><li><span class="step">3</span><strong>Pendahuluan</strong><span class="ocodes">K02 · K00 · K03 · K04 · K05 · K01</span><span class="obab">Bab 7–10</span></li><li><span class="step">4</span><strong>Metodologi</strong><span class="ocodes">K08 sampai K17</span><span class="obab">Bab 11–19</span></li><li><span class="step">5</span><strong>Jadwal</strong><span class="ocodes">K18</span><span class="obab">Bab 20</span></li><li><span class="step">6</span><strong>Naskah utuh</strong><span class="ocodes">K00 · K01 final</span><span class="obab">Bab 21</span></li><li><span class="step">7</span><strong>Asesmen lisan</strong><span class="ocodes">Penguasaan isi</span><span class="obab">Bab 22</span></li></ol>
+  </div>
+</section>
+
+<section class="block" id="isi">
+  <div class="wrap">
+    <p class="eyebrow">Daftar isi</p>
+    <h2>Lima bagian, 22 bab, dan Lampiran A sampai G</h2>
+    <p class="intro">Urutan bab mengikuti urutan menulis. Setiap bab inti menghasilkan komponen yang kodenya tertera di kanan judul. Buka bab untuk melihat subbab dan slide-nya. Nomor halaman mengikuti PDF buku utuh.</p>
+    <div class="tools">
+      <button type="button" id="openAll">Buka semua bab</button>
+      <button type="button" id="closeAll">Tutup semua</button>
+    </div>
+    <section class="bagian" aria-labelledby="bg-I">
+  <header class="bagian-head">
+    <p class="eyebrow">Bagian I · hlm. 1</p>
+    <h3 id="bg-I">Pengantar</h3>
+    <p>Peta, topik, alat, dan bahan sebelum menulis. Menghasilkan lima komponen persiapan, PRA1 sampai PRA5, yang tidak masuk dokumen proposal.</p>
+    <a class="slide slide-sm" href="https://drive.google.com/file/d/1lvhEqIGPEqnQOKeI1e32mW4y9QKDIlt2/view" target="_blank" rel="noopener">Slide pengantar Bagian I</a>
+  </header>
+  <div class="babs"><details class="bab" id="bab-1">
+  <summary>
+    <span class="babnum">Bab 1</span>
+    <span class="babtitle">Proposal TA Informatika: Anatomi dan Benang Merah</span>
+    <span class="chips"><span class="code"><b>PRA1</b>&#8209;peta</span></span>
+    <span class="page">hlm. 3</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">1.1</span>Proposal TA dan buku ini</li><li><span class="num">1.2</span>Anatomi proposal</li><li><span class="num">1.3</span>Urutan menulis dan urutan dokumen</li><li><span class="num">1.4</span>Benang merah</li><li><span class="num">1.5</span>Contoh di buku ini</li><li><span class="num">1.6</span>Konvensi penulisan</li><li><span class="num">1.7</span>Memakai LLM dengan bertanggung jawab</li><li><span class="num">1.8</span>Mempertanggungjawabkan proposal</li><li><span class="num">1.9</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1xgujBr-3DPCimQ_hmaip93Cy8_WGmwbz/view" target="_blank" rel="noopener">Slide Bab 1 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-2">
+  <summary>
+    <span class="babnum">Bab 2</span>
+    <span class="babtitle">Topik dan Data yang Layak</span>
+    <span class="chips"><span class="code"><b>PRA2</b>&#8209;kelayakan</span><span class="code"><b>PRA3</b>&#8209;lembardata</span></span>
+    <span class="page">hlm. 19</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">2.1</span>Topik TA: tugas, data, dan keluaran</li><li><span class="num">2.2</span>Tujuh kriteria dalam empat kelompok</li><li><span class="num">2.3</span>Ketersediaan, akses, dan legalitas data</li><li><span class="num">2.4</span>Tiga topik yang gagal</li><li><span class="num">2.5</span>Mengamankan data sejak awal</li><li><span class="num">2.6</span>Contoh utama dan contoh pendamping</li><li><span class="num">2.7</span>Konsultasi dengan calon pembimbing</li><li><span class="num">2.8</span>Menggunakan LLM</li><li><span class="num">2.9</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1ZVGhqopeqaYver9IYPGnY9O6bvniOP0z/view" target="_blank" rel="noopener">Slide Bab 2 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-3">
+  <summary>
+    <span class="babnum">Bab 3</span>
+    <span class="babtitle">Tata Tulis Komponen</span>
+    <span class="chips"><span class="code"><b>PRA4</b>&#8209;berkas</span></span>
+    <span class="page">hlm. 42</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">3.1</span>Satu komponen, satu berkas</li><li><span class="num">3.2</span>Menulis poin</li><li><span class="num">3.3</span>Tabel</li><li><span class="num">3.4</span>Grafik</li><li><span class="num">3.5</span>Diagram dan gambar</li><li><span class="num">3.6</span>Notasi, angka, dan satuan</li><li><span class="num">3.7</span>Sitasi</li><li><span class="num">3.8</span>Daftar periksa tata tulis</li><li><span class="num">3.9</span>Konsultasi dengan calon pembimbing</li><li><span class="num">3.10</span>Menggunakan LLM</li><li><span class="num">3.11</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1DzUza5PH44vn0Z3LkRy-ZWPNSNEdaZ_q/view" target="_blank" rel="noopener">Slide Bab 3 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-4">
+  <summary>
+    <span class="babnum">Bab 4</span>
+    <span class="babtitle">Menelusuri Literatur dan Mengelola Rujukan</span>
+    <span class="chips"><span class="code"><b>PRA5</b>&#8209;penelusuran</span></span>
+    <span class="page">hlm. 72</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">4.1</span>Literatur yang dicari</li><li><span class="num">4.2</span>Dari topik ke kueri</li><li><span class="num">4.3</span>Tempat mencari</li><li><span class="num">4.4</span>Snowballing</li><li><span class="num">4.5</span>Menyaring dan menilai sumber</li><li><span class="num">4.6</span>Mencatat penelusuran</li><li><span class="num">4.7</span>Mengelola rujukan</li><li><span class="num">4.8</span>Contoh utama</li><li><span class="num">4.9</span>Konsultasi dengan calon pembimbing</li><li><span class="num">4.10</span>Menggunakan LLM</li><li><span class="num">4.11</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/18RyWzIQKsrnw1PAOF7dw-F5YjHiJfix-/view" target="_blank" rel="noopener">Slide Bab 4 (PDF)</a>
+  </div>
+</details></div>
+</section>
+<section class="bagian" aria-labelledby="bg-II">
+  <header class="bagian-head">
+    <p class="eyebrow">Bagian II · hlm. 97</p>
+    <h3 id="bg-II">Kajian Pustaka</h3>
+    <p>Ditulis paling awal di antara komponen proposal: Matriks Literatur, lalu landasan teori, sintesis, dan posisi TA.</p>
+    <a class="slide slide-sm" href="https://drive.google.com/file/d/1AZ49pweGGs5qja-cuYpzMyi0p1g0SSCD/view" target="_blank" rel="noopener">Slide pengantar Bagian II</a>
+  </header>
+  <div class="babs"><details class="bab" id="bab-5">
+  <summary>
+    <span class="babnum">Bab 5</span>
+    <span class="babtitle">Matriks Literatur</span>
+    <span class="chips"><span class="code"><b>K06</b>&#8209;matriks</span></span>
+    <span class="page">hlm. 99</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">5.1</span>Apa itu K06-matriks</li><li><span class="num">5.2</span>Formulir dan Matriks Literatur</li><li><span class="num">5.3</span>Tingkat baca: paper peta dan paper acuan</li><li><span class="num">5.4</span>Mengisi bertahap</li><li><span class="num">5.5</span>Verifikasi</li><li><span class="num">5.6</span>Dari formulir ke tabel tinjauan literatur prodi</li><li><span class="num">5.7</span>Hasil K06-matriks pada contoh utama</li><li><span class="num">5.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">5.9</span>Menggunakan LLM</li><li><span class="num">5.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1ynwLltcijcLa4mwrhqcy_j_HkzbaTwp5/view" target="_blank" rel="noopener">Slide Bab 5 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-6">
+  <summary>
+    <span class="babnum">Bab 6</span>
+    <span class="babtitle">Landasan Teori, Sintesis Literatur, dan Posisi TA</span>
+    <span class="chips"><span class="code"><b>K07</b>&#8209;landasan</span></span>
+    <span class="page">hlm. 120</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">6.1</span>Apa itu K07-landasan</li><li><span class="num">6.2</span>K07-landasan yang kuat dan yang lemah</li><li><span class="num">6.3</span>Bahan dan langkah penyusunan</li><li><span class="num">6.4</span>Hasil K07-landasan pada contoh utama</li><li><span class="num">6.5</span>Contoh pendamping: klasifikasi citra penyakit daun</li><li><span class="num">6.6</span>Kembali ke Matriks Literatur</li><li><span class="num">6.7</span>Menggunakan LLM</li><li><span class="num">6.8</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/11hti2JmkwfeBFnWzu-yI8YXLMVh5JnwS/view" target="_blank" rel="noopener">Slide Bab 6 (PDF)</a>
+  </div>
+</details></div>
+</section>
+<section class="bagian" aria-labelledby="bg-III">
+  <header class="bagian-head">
+    <p class="eyebrow">Bagian III · hlm. 140</p>
+    <h3 id="bg-III">Pendahuluan</h3>
+    <p>Dari celah di kajian pustaka ke latar belakang, rumusan masalah, tujuan, dan ilustrasi masukan-keluaran, beserta draf judul dan abstrak.</p>
+    <a class="slide slide-sm" href="https://drive.google.com/file/d/1K-QTnCMNk5Flts8PtV787ncfDLcL80TS/view" target="_blank" rel="noopener">Slide pengantar Bagian III</a>
+  </header>
+  <div class="babs"><details class="bab" id="bab-7">
+  <summary>
+    <span class="babnum">Bab 7</span>
+    <span class="babtitle">Latar Belakang dan Judul</span>
+    <span class="chips"><span class="code"><b>K02</b>&#8209;latarbelakang</span><span class="code"><b>K00</b>&#8209;judul</span></span>
+    <span class="page">hlm. 142</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">7.1</span>Apa itu K02-latarbelakang</li><li><span class="num">7.2</span>K02-latarbelakang yang kuat dan yang lemah</li><li><span class="num">7.3</span>Bahan dan tahap penyusunan</li><li><span class="num">7.4</span>Hasil K02-latarbelakang pada contoh utama</li><li><span class="num">7.5</span>Draf judul (K00-judul)</li><li><span class="num">7.6</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">7.7</span>Menggunakan LLM</li><li><span class="num">7.8</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1A0x_2maRg4AUOO6DnoccSO8vcMRsqoe2/view" target="_blank" rel="noopener">Slide Bab 7 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-8">
+  <summary>
+    <span class="babnum">Bab 8</span>
+    <span class="babtitle">Rumusan Masalah dan Pertanyaan Kajian</span>
+    <span class="chips"><span class="code"><b>K03</b>&#8209;masalah</span></span>
+    <span class="page">hlm. 162</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">8.1</span>Apa itu K03-masalah</li><li><span class="num">8.2</span>K03-masalah yang kuat dan yang lemah</li><li><span class="num">8.3</span>Uji keterjawaban</li><li><span class="num">8.4</span>Bahan dan tahap penyusunan</li><li><span class="num">8.5</span>Hasil K03-masalah pada contoh utama</li><li><span class="num">8.6</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">8.7</span>Menggunakan LLM</li><li><span class="num">8.8</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1ZIeNfQCtv66Tset24700wC1a7-Zk3vDK/view" target="_blank" rel="noopener">Slide Bab 8 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-9">
+  <summary>
+    <span class="babnum">Bab 9</span>
+    <span class="babtitle">Tujuan, Manfaat, dan Batasan</span>
+    <span class="chips"><span class="code"><b>K04</b>&#8209;tujuan</span></span>
+    <span class="page">hlm. 181</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">9.1</span>Apa itu K04-tujuan</li><li><span class="num">9.2</span>Tujuan</li><li><span class="num">9.3</span>Manfaat</li><li><span class="num">9.4</span>Batasan</li><li><span class="num">9.5</span>K04-tujuan yang kuat dan yang lemah</li><li><span class="num">9.6</span>Bahan dan tahap penyusunan</li><li><span class="num">9.7</span>Hasil K04-tujuan pada contoh utama</li><li><span class="num">9.8</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">9.9</span>Menggunakan LLM</li><li><span class="num">9.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1nQE05vY0-30DcW5xvOv_mqdO17YumLJN/view" target="_blank" rel="noopener">Slide Bab 9 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-10">
+  <summary>
+    <span class="babnum">Bab 10</span>
+    <span class="babtitle">Ilustrasi Masukan-Keluaran dan Draf Abstrak</span>
+    <span class="chips"><span class="code"><b>K05</b>&#8209;ilustrasi</span><span class="code"><b>K01</b>&#8209;abstrak</span></span>
+    <span class="page">hlm. 200</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">10.1</span>Apa itu K05-ilustrasi</li><li><span class="num">10.2</span>Definisi formal, masukan, keluaran, dan penjelasan</li><li><span class="num">10.3</span>Memilih contoh</li><li><span class="num">10.4</span>K05-ilustrasi dan gambar lain di proposal</li><li><span class="num">10.5</span>K05-ilustrasi yang kuat dan yang lemah</li><li><span class="num">10.6</span>Bahan dan tahap penyusunan</li><li><span class="num">10.7</span>Hasil K05-ilustrasi pada contoh utama</li><li><span class="num">10.8</span>Draf abstrak (K01-abstrak)</li><li><span class="num">10.9</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">10.10</span>Menggunakan LLM</li><li><span class="num">10.11</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1Ck82xA7UasxXppsTKSje-Vhz694QKx2X/view" target="_blank" rel="noopener">Slide Bab 10 (PDF)</a>
+  </div>
+</details></div>
+</section>
+<section class="bagian" aria-labelledby="bg-IV">
+  <header class="bagian-head">
+    <p class="eyebrow">Bagian IV · hlm. 225</p>
+    <h3 id="bg-IV">Metodologi</h3>
+    <p>Empat tahap: data, metode, pengujian, dan batas. Sembilan bab, dari deskripsi data sampai etika dan privasi data.</p>
+    <a class="slide slide-sm" href="https://drive.google.com/file/d/1JSFh7A6eTdQFolcRDlZXXJ5VEN9Lzlyq/view" target="_blank" rel="noopener">Slide pengantar Bagian IV</a>
+  </header>
+  <div class="babs"><details class="bab" id="bab-11">
+  <summary>
+    <span class="babnum">Bab 11</span>
+    <span class="babtitle">Deskripsi Data</span>
+    <span class="chips"><span class="code"><b>K08</b>&#8209;data</span></span>
+    <span class="page">hlm. 228</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">11.1</span>Apa itu K08-data</li><li><span class="num">11.2</span>Poin-poin K08-data</li><li><span class="num">11.3</span>Membandingkan dengan data paper acuan</li><li><span class="num">11.4</span>Bila data dibangun sendiri</li><li><span class="num">11.5</span>K08-data yang kuat dan yang lemah</li><li><span class="num">11.6</span>Hasil K08-data pada contoh utama</li><li><span class="num">11.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">11.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">11.9</span>Menggunakan LLM</li><li><span class="num">11.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1TDUZeI52q5T8FY4dBZySG26uFAql8Zvu/view" target="_blank" rel="noopener">Slide Bab 11 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-12">
+  <summary>
+    <span class="babnum">Bab 12</span>
+    <span class="babtitle">Rencana EDA</span>
+    <span class="chips"><span class="code"><b>K09</b>&#8209;eda</span></span>
+    <span class="page">hlm. 253</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">12.1</span>Apa itu K09-eda</li><li><span class="num">12.2</span>Poin-poin K09-eda</li><li><span class="num">12.3</span>Pemeriksaan menurut jenis data</li><li><span class="num">12.4</span>Batas EDA: data uji dan kebocoran</li><li><span class="num">12.5</span>K09-eda yang kuat dan yang lemah</li><li><span class="num">12.6</span>Hasil K09-eda pada contoh utama</li><li><span class="num">12.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">12.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">12.9</span>Menggunakan LLM</li><li><span class="num">12.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1SJNzSUawBTfOv-gXoWIc_JRywluRTSfP/view" target="_blank" rel="noopener">Slide Bab 12 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-13">
+  <summary>
+    <span class="babnum">Bab 13</span>
+    <span class="babtitle">Rencana Praproses</span>
+    <span class="chips"><span class="code"><b>K10</b>&#8209;praproses</span></span>
+    <span class="page">hlm. 276</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">13.1</span>Apa itu K10-praproses</li><li><span class="num">13.2</span>Poin-poin K10-praproses</li><li><span class="num">13.3</span>Langkah praproses menurut jenis data</li><li><span class="num">13.4</span>Praproses tanpa kebocoran</li><li><span class="num">13.5</span>K10-praproses yang kuat dan yang lemah</li><li><span class="num">13.6</span>Hasil K10-praproses pada contoh utama</li><li><span class="num">13.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">13.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">13.9</span>Menggunakan LLM</li><li><span class="num">13.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1r5WFYfV53rjMhjIgbp1nQK841Pop0s-S/view" target="_blank" rel="noopener">Slide Bab 13 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-14">
+  <summary>
+    <span class="babnum">Bab 14</span>
+    <span class="babtitle">Metode Usulan, Arsitektur Model, dan System Framework</span>
+    <span class="chips"><span class="code"><b>K11</b>&#8209;metode</span><span class="code"><b>K12</b>&#8209;framework</span></span>
+    <span class="page">hlm. 291</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">14.1</span>Apa itu K11-metode dan K12-framework</li><li><span class="num">14.2</span>Poin-poin K11-metode dan K12-framework</li><li><span class="num">14.3</span>Justifikasi metode</li><li><span class="num">14.4</span>Arsitektur model dan system framework</li><li><span class="num">14.5</span>K11-metode dan K12-framework yang kuat dan yang lemah</li><li><span class="num">14.6</span>Hasil K11-metode dan K12-framework pada contoh utama</li><li><span class="num">14.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">14.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">14.9</span>Menggunakan LLM</li><li><span class="num">14.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1BkTCOGA4YXKdVF3fCxT8mC5VihQ6FEdv/view" target="_blank" rel="noopener">Slide Bab 14 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-15">
+  <summary>
+    <span class="babnum">Bab 15</span>
+    <span class="babtitle">Baseline Pembanding</span>
+    <span class="chips"><span class="code"><b>K13</b>&#8209;baseline</span></span>
+    <span class="page">hlm. 312</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">15.1</span>Apa itu K13-baseline</li><li><span class="num">15.2</span>Poin-poin K13-baseline</li><li><span class="num">15.3</span>Jenis baseline</li><li><span class="num">15.4</span>Perbandingan yang adil</li><li><span class="num">15.5</span>K13-baseline yang kuat dan yang lemah</li><li><span class="num">15.6</span>Hasil K13-baseline pada contoh utama</li><li><span class="num">15.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">15.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">15.9</span>Menggunakan LLM</li><li><span class="num">15.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1uC3VRBBRKitiXADdGfmZPRTB3US6FFhS/view" target="_blank" rel="noopener">Slide Bab 15 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-16">
+  <summary>
+    <span class="babnum">Bab 16</span>
+    <span class="babtitle">Rancangan Eksperimen</span>
+    <span class="chips"><span class="code"><b>K14</b>&#8209;eksperimen</span></span>
+    <span class="page">hlm. 330</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">16.1</span>Apa itu K14-eksperimen</li><li><span class="num">16.2</span>Poin-poin K14-eksperimen</li><li><span class="num">16.3</span>Pembagian data</li><li><span class="num">16.4</span>Pencarian hiperparameter, pengulangan, dan ablasi</li><li><span class="num">16.5</span>Urutan kerja dan penguncian</li><li><span class="num">16.6</span>K14-eksperimen yang kuat dan yang lemah</li><li><span class="num">16.7</span>Hasil K14-eksperimen pada contoh utama</li><li><span class="num">16.8</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">16.9</span>Konsultasi dengan calon pembimbing</li><li><span class="num">16.10</span>Menggunakan LLM</li><li><span class="num">16.11</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1gsVg4Cz2cxjMnlHyGA0PqtLGhV77m7cr/view" target="_blank" rel="noopener">Slide Bab 16 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-17">
+  <summary>
+    <span class="babnum">Bab 17</span>
+    <span class="babtitle">Metrik Evaluasi</span>
+    <span class="chips"><span class="code"><b>K15</b>&#8209;metrik</span></span>
+    <span class="page">hlm. 351</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">17.1</span>Apa itu K15-metrik</li><li><span class="num">17.2</span>Poin-poin K15-metrik</li><li><span class="num">17.3</span>Memilih metrik menurut tugas</li><li><span class="num">17.4</span>Definisi yang bisa dihitung ulang</li><li><span class="num">17.5</span>K15-metrik yang kuat dan yang lemah</li><li><span class="num">17.6</span>Hasil K15-metrik pada contoh utama</li><li><span class="num">17.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">17.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">17.9</span>Menggunakan LLM</li><li><span class="num">17.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1RgZGa1djdRgH_2Mka13J3cH8pUQhYjLP/view" target="_blank" rel="noopener">Slide Bab 17 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-18">
+  <summary>
+    <span class="babnum">Bab 18</span>
+    <span class="babtitle">Rencana Analisis Hasil Eksperimen</span>
+    <span class="chips"><span class="code"><b>K16</b>&#8209;analisis</span></span>
+    <span class="page">hlm. 370</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">18.1</span>Apa itu K16-analisis</li><li><span class="num">18.2</span>Poin-poin K16-analisis</li><li><span class="num">18.3</span>Membandingkan sistem</li><li><span class="num">18.4</span>Analisis lanjutan dan aturan menyimpulkan</li><li><span class="num">18.5</span>K16-analisis yang kuat dan yang lemah</li><li><span class="num">18.6</span>Hasil K16-analisis pada contoh utama</li><li><span class="num">18.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">18.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">18.9</span>Menggunakan LLM</li><li><span class="num">18.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1OMdRBspATl4ThOfyjg2MplVfVFG_yZQl/view" target="_blank" rel="noopener">Slide Bab 18 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-19">
+  <summary>
+    <span class="babnum">Bab 19</span>
+    <span class="babtitle">Keterbatasan, Ancaman Validitas, Etika, dan Privasi Data</span>
+    <span class="chips"><span class="code"><b>K17</b>&#8209;etika</span></span>
+    <span class="page">hlm. 394</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">19.1</span>Apa itu K17-etika</li><li><span class="num">19.2</span>Poin-poin K17-etika</li><li><span class="num">19.3</span>Empat jenis ancaman validitas</li><li><span class="num">19.4</span>Etika data</li><li><span class="num">19.5</span>K17-etika yang kuat dan yang lemah</li><li><span class="num">19.6</span>Hasil K17-etika pada contoh utama</li><li><span class="num">19.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">19.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">19.9</span>Menggunakan LLM</li><li><span class="num">19.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/10Pk9-cO7-8s50Lh20c2ND0EUusfRZm2m/view" target="_blank" rel="noopener">Slide Bab 19 (PDF)</a>
+  </div>
+</details></div>
+</section>
+<section class="bagian" aria-labelledby="bg-V">
+  <header class="bagian-head">
+    <p class="eyebrow">Bagian V · hlm. 412</p>
+    <h3 id="bg-V">Menyatukan dan Mempertanggungjawabkan</h3>
+    <p>Jadwal, merangkai komponen menjadi naskah utuh, dan menjelaskan proposal secara lisan.</p>
+    <a class="slide slide-sm" href="https://drive.google.com/file/d/11sgupG_7MjtVTBpTvjmE8vS24qnf2s4j/view" target="_blank" rel="noopener">Slide pengantar Bagian V</a>
+  </header>
+  <div class="babs"><details class="bab" id="bab-20">
+  <summary>
+    <span class="babnum">Bab 20</span>
+    <span class="babtitle">Rencana Kegiatan dan Jadwal</span>
+    <span class="chips"><span class="code"><b>K18</b>&#8209;jadwal</span></span>
+    <span class="page">hlm. 414</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">20.1</span>Apa itu K18-jadwal</li><li><span class="num">20.2</span>Poin-poin K18-jadwal</li><li><span class="num">20.3</span>Dari komponen ke kegiatan</li><li><span class="num">20.4</span>Memperkirakan durasi dan menyusun jadwal</li><li><span class="num">20.5</span>K18-jadwal yang kuat dan yang lemah</li><li><span class="num">20.6</span>Hasil K18-jadwal pada contoh utama</li><li><span class="num">20.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">20.8</span>Konsultasi dengan calon pembimbing</li><li><span class="num">20.9</span>Menggunakan LLM</li><li><span class="num">20.10</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1SUXoDIL15mVW-d_CX6K1d3mVKt3uBgFc/view" target="_blank" rel="noopener">Slide Bab 20 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-21">
+  <summary>
+    <span class="babnum">Bab 21</span>
+    <span class="babtitle">Benang Merah dan Merangkai Proposal</span>
+    <span class="chips"><span class="code"><b>K00</b>&#8209;judul final</span><span class="code"><b>K01</b>&#8209;abstrak final</span></span>
+    <span class="page">hlm. 432</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">21.1</span>Dari komponen ke naskah proposal</li><li><span class="num">21.2</span>Menguji benang merah</li><li><span class="num">21.3</span>Memeriksa konsistensi antarkomponen</li><li><span class="num">21.4</span>Judul final (K00-judul)</li><li><span class="num">21.5</span>Abstrak final (K01-abstrak)</li><li><span class="num">21.6</span>Merangkai komponen menjadi naskah</li><li><span class="num">21.7</span>Memeriksa tata tulis naskah</li><li><span class="num">21.8</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">21.9</span>Konsultasi dengan calon pembimbing</li><li><span class="num">21.10</span>Menggunakan LLM</li><li><span class="num">21.11</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1gbGxPv9sl1OWvLCyiY3BztfoDvulOBjP/view" target="_blank" rel="noopener">Slide Bab 21 (PDF)</a>
+  </div>
+</details><details class="bab" id="bab-22">
+  <summary>
+    <span class="babnum">Bab 22</span>
+    <span class="babtitle">Mempertanggungjawabkan Proposal secara Lisan</span>
+    <span class="chips"><span class="code code-plain">tanpa komponen</span></span>
+    <span class="page">hlm. 457</span>
+  </summary>
+  <div class="babbody">
+    <ol class="subs"><li><span class="num">22.1</span>Mengapa proposal diuji secara lisan</li><li><span class="num">22.2</span>Tiga lapis pertanyaan</li><li><span class="num">22.3</span>Yang diperhatikan penguji</li><li><span class="num">22.4</span>Menyiapkan diri</li><li><span class="num">22.5</span>Menjawab pertanyaan</li><li><span class="num">22.6</span>Tanya jawab pada contoh utama</li><li><span class="num">22.7</span>Contoh pendamping: peramalan PM2,5 per jam</li><li><span class="num">22.8</span>Setelah asesmen</li><li><span class="num">22.9</span>Konsultasi dengan calon pembimbing</li><li><span class="num">22.10</span>Menggunakan LLM</li><li><span class="num">22.11</span>Latihan dan pertanyaan uji diri</li><li><span class="num">&nbsp;</span>Daftar Pustaka</li></ol>
+    <a class="slide" href="https://drive.google.com/file/d/1cUWfLBYk6KEXwrzIVkFDSfMBrUrD0jK6/view" target="_blank" rel="noopener">Slide Bab 22 (PDF)</a>
+  </div>
+</details></div>
+</section>
+    <section class="bagian" aria-labelledby="bg-lamp">
+      <header class="bagian-head">
+        <p class="eyebrow">Mulai hlm. 472</p>
+        <h3 id="bg-lamp">Daftar Pustaka dan Lampiran</h3>
+        <p>Daftar pustaka seluruh buku dalam lima kelompok, lalu ringkasan komponen, deklarasi LLM, daftar periksa, glosarium, LaTeX di Overleaf, dan lembar kerja.</p>
+      </header>
+      <div class="lamps"><details class="bab lamp" id="lampiran-a">
+  <summary><span class="babnum">Lampiran A</span><span class="babtitle">Ringkasan Sembilan Belas Komponen dan Urutan Menulis</span><span class="chips"></span><span class="page">hlm. 480</span></summary>
+  <div class="babbody"><ol class="subs"><li><span class="num">A.1</span>Komponen dalam urutan menulis</li><li><span class="num">A.2</span>Dari komponen ke naskah</li><li><span class="num">A.3</span>Daftar periksa kemajuan</li></ol></div>
+</details>
+<details class="bab lamp" id="lampiran-b">
+  <summary><span class="babnum">Lampiran B</span><span class="babtitle">Template Deklarasi Penggunaan LLM</span><span class="chips"></span><span class="page">hlm. 485</span></summary>
+  <div class="babbody"><ol class="subs"><li><span class="num">B.1</span>Mengapa deklarasi dibuat</li><li><span class="num">B.2</span>Isi deklarasi dan cara mencatatnya</li><li><span class="num">B.3</span>Template dan contoh terisi</li></ol></div>
+</details>
+<details class="bab lamp" id="lampiran-c">
+  <summary><span class="babnum">Lampiran C</span><span class="babtitle">Daftar Periksa Tata Tulis Mandiri</span><span class="chips"></span><span class="page">hlm. 490</span></summary>
+  <div class="babbody"><ol class="subs"><li><span class="num">C.1</span>Cara memakai daftar periksa</li><li><span class="num">C.2</span>Gambar dan tabel</li><li><span class="num">C.3</span>Persamaan, sitasi, dan istilah</li><li><span class="num">C.4</span>Ejaan, angka, dan satuan</li><li><span class="num">C.5</span>Daftar pustaka</li></ol></div>
+</details>
+<details class="bab lamp" id="lampiran-d">
+  <summary><span class="babnum">Lampiran D</span><span class="babtitle">Contoh Proposal Utuh pada Contoh Utama</span><span class="chips"></span><span class="page">sedang ditulis</span></summary>
+  <div class="babbody"><p class="note">Lampiran ini belum ditulis pada draf sekarang.</p></div>
+</details>
+<details class="bab lamp" id="lampiran-e">
+  <summary><span class="babnum">Lampiran E</span><span class="babtitle">Glosarium Istilah</span><span class="chips"></span><span class="page">hlm. 500</span></summary>
+  <div class="babbody"><ol class="subs"><li><span class="num">E.1</span>Cara memakai glosarium</li><li><span class="num">E.2</span>Istilah proposal, literatur, dan penulisan</li><li><span class="num">E.3</span>Istilah data, metode, dan evaluasi</li><li><span class="num">E.4</span>Padanan istilah asing</li></ol></div>
+</details>
+<details class="bab lamp" id="lampiran-f">
+  <summary><span class="babnum">Lampiran F</span><span class="babtitle">Menulis Proposal dengan LaTeX di Overleaf</span><span class="chips"></span><span class="page">hlm. 508</span></summary>
+  <div class="babbody"><ol class="subs"><li><span class="num">F.1</span>Menyiapkan proyek Overleaf dari template</li><li><span class="num">F.2</span>Memindahkan naskah dari Word ke LaTeX</li><li><span class="num">F.3</span>Sitasi dan BibTeX</li><li><span class="num">F.4</span>Gambar, tabel, dan persamaan</li><li><span class="num">F.5</span>Rujukan silang, lampiran, dan kompilasi bersih</li><li><span class="num">F.6</span>Daftar periksa penggunaan fitur LaTeX</li></ol></div>
+</details>
+<details class="bab lamp" id="lampiran-g">
+  <summary><span class="babnum">Lampiran G</span><span class="babtitle">Lembar Kerja Komponen untuk Persiapan dan Proposal</span><span class="chips"></span><span class="page">hlm. 520</span></summary>
+  <div class="babbody"><ol class="subs"><li><span class="num">G.1</span>Cara memakai lembar</li><li><span class="num">G.2</span>Daftar lembar</li><li><span class="num">G.3</span>Dari lembar ke proposal</li></ol></div>
+</details></div>
+    </section>
+  </div>
+</section>
+
+<section class="block" id="contoh">
+  <div class="wrap">
+    <p class="eyebrow">Contoh di buku ini</p>
+    <h2>Satu proposal tumbuh dari bab ke bab</h2>
+    <p class="intro">Subbidang dalam contoh hanya contoh. Polanya berlaku juga di subbidang lain, termasuk TA eksperimen tanpa dataset tetap, misalnya uji kinerja algoritma atau simulasi jaringan.</p>
+    <div class="examples">
+      <div class="ex"><span class="tag">Contoh utama</span><h3>Koreferensi dan penautan entitas tokoh pada teks sirah</h3><p>Korpus berbahasa Indonesia dari buku sirah karya M. Quraish Shihab, bagian masa kelahiran hingga kenabian. Hasil setiap komponen tampil di kotak "Hasil K.. pada contoh utama".</p></div>
+      <div class="ex alt"><span class="tag">Pendamping · deret waktu</span><h3>Peramalan PM2,5 per jam</h3><p>Muncul di Bab 2, Bab 4, dan Bab 7 sampai Bab 22. Bersifat fiktif, termasuk angka dan sitasinya.</p></div>
+      <div class="ex alt"><span class="tag">Pendamping · visi komputer</span><h3>Klasifikasi citra penyakit daun</h3><p>Muncul di Bab 4 dan Bab 6. Bersifat fiktif, hanya untuk memperlihatkan bentuk.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="unduh">
+  <div class="wrap">
+    <p class="eyebrow">Unduh</p>
+    <h2>Buku dan tiga kelengkapannya</h2>
+    <p class="intro">Semua berkas ada di folder Google Drive buku. Versi terbaru selalu ada di folder itu.</p>
+    <div class="cards">
+      <div class="card"><span class="fmt">PDF · v45</span><h3>Buku ajar</h3><p>Buku utuh dengan daftar isi yang bisa diklik.</p><div class="links"><a href="https://drive.google.com/file/d/10RrBLsiYM1OjCi3eSwnB111FTAaGTNHb/view" target="_blank" rel="noopener">Buka PDF buku</a></div></div>
+      <div class="card"><span class="fmt">PDF · PPTX</span><h3>Slide per bab</h3><p>Satu deck untuk setiap bab dan setiap pengantar bagian. Tautan PDF per bab juga ada di daftar isi.</p><div class="links"><a href="https://drive.google.com/drive/folders/1ktaumryo4-WsQ9Uf0B1_b1wGkhNWLvd0" target="_blank" rel="noopener">Buka folder slide</a></div></div>
+      <div class="card"><span class="fmt">Word · PDF · v44</span><h3>Lembar kerja komponen (template)</h3><p>Satu lembar untuk setiap komponen persiapan dan komponen proposal. Versi PDF memuat lembar kosong dan contoh isian pada contoh utama.</p><div class="links"><a href="https://drive.google.com/file/d/1Jgt8M3eG_55ZeS0rwAKB1tFOtAgGp-Bp/view" target="_blank" rel="noopener">Lembar Word (zip)</a><a href="https://drive.google.com/file/d/1CYgX8f8lA6VPbyDYRARP2ISCYOoRY7fS/view" target="_blank" rel="noopener">Lembar dan contoh (PDF)</a></div></div>
+      <div class="card"><span class="fmt">Word</span><h3>Kerangka proposal TA</h3><p>Kerangka naskah yang siap diisi, dengan petunjuk per subbab. Ganti NIM di nama berkas dengan NIM-mu.</p><div class="links"><a href="https://drive.google.com/file/d/1fXfLJ_1GYRVZCwWEwZxVwTxNYFGdAfcc/view" target="_blank" rel="noopener">Unduh kerangka</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="lisensi">
+  <div class="wrap">
+    <p class="eyebrow">Lisensi</p>
+    <h2>Bebas dipakai dengan atribusi (CC BY 4.0)</h2>
+    <div class="license">
+      <div>
+        <p>Buku ini dilisensikan di bawah <a href="https://creativecommons.org/licenses/by/4.0/deed.id" target="_blank" rel="noopener">Creative Commons Atribusi 4.0 Internasional</a>. Siapa pun bebas berbagi dan mengadaptasi buku ini untuk keperluan apa pun, dengan mencantumkan atribusi.</p>
+        <ul>
+          <li>Logo Fakultas Informatika dan Universitas Telkom tidak termasuk lisensi ini.</li>
+          <li>Kutipan, angka, dan contoh dari karya pihak lain tetap tunduk pada hak cipta pemiliknya.</li>
+          <li>Ketentuan program studi dan arahan pembimbing tetap menjadi acuan utama.</li>
+        </ul>
+      </div>
+      <div class="attr">
+        <p><strong>Contoh atribusi</strong></p>
+        <p id="attrText">M. A. Bijaksana, Menulis Proposal Tugas Akhir Informatika, draf buku ajar, Fakultas Informatika, Universitas Telkom, 11 Nov. 2026. Dilisensikan di bawah CC BY 4.0.</p>
+        <button type="button" id="copyAttr">Salin atribusi</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Moch Arif Bijaksana · Fakultas Informatika, Universitas Telkom · Draf buku ajar. Kritik dan saran dari mahasiswa maupun dosen sangat membantu perbaikan buku ini.</div>
+</footer>
+
+<script>
+(function(){
+  var all = document.querySelectorAll('details.bab');
+  document.getElementById('openAll').addEventListener('click', function(){ all.forEach(function(d){ d.open = true; }); });
+  document.getElementById('closeAll').addEventListener('click', function(){ all.forEach(function(d){ d.open = false; }); });
+  function openFromHash(){
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (el && el.tagName === 'DETAILS') { el.open = true; }
+  }
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+  document.querySelectorAll('.doccol a').forEach(function(a){
+    a.addEventListener('click', function(){
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (el) el.open = true;
+    });
+  });
+  var btn = document.getElementById('copyAttr');
+  btn.addEventListener('click', function(){
+    var txt = document.getElementById('attrText').textContent;
+    try {
+      navigator.clipboard.writeText(txt).then(function(){ btn.textContent = 'Tersalin'; }, function(){ btn.textContent = 'Pilih teks lalu salin manual'; });
+    } catch(e) { btn.textContent = 'Pilih teks lalu salin manual'; }
+  });
+})();
+</script>
+</body>
+</html>
